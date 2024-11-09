@@ -1,9 +1,6 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS quest_responses;
-DROP TABLE IF EXISTS forum_posts;
-DROP TABLE IF EXISTS forum_replies;
+DROP TABLE q_responses;
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     email TEXT NOT NULL UNIQUE,
     first_name TEXT NOT NULL,
@@ -14,17 +11,15 @@ CREATE TABLE users (
     sex CHAR NOT NULL
 );
 
-CREATE TABLE quest_responses (
+CREATE TABLE IF NOT EXISTS quest_responses (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
-    responses JSON NOT NULL,
-    score INTEGER NOT NULL,
     submitted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    pcl5result VARCHAR(100) NOT NULL,
+    pcl5result INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE forum_posts (
+CREATE TABLE IF NOT EXISTS forum_posts (
     id INTEGER PRIMARY KEY AUTOINCREMENT, 
     user_id INTEGER NOT NULL, 
     title VARCHAR(500),
@@ -32,7 +27,7 @@ CREATE TABLE forum_posts (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE forum_replies (
+CREATE TABLE IF NOT EXISTS forum_replies (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
     og_post_id INTEGER NOT NULL,

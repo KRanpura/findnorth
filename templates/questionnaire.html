@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FindNorth</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <h1>
+                FindNorth
+                <img src="{{ url_for('static', filename='images/nstar.png') }}" alt="FindNorth Logo" class="logo">
+            </h1>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/login">Forum</a></li>
+                <li><a href="/signup">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main>
+            <h2>Questionnaire:</h2>
+            <p>In the past month, on a scale of 0-4, how much were you bothered by:<br>
+               0 - Not at all, 1 - A little bit, 2 - Moderately, 3 - Quite a bit, 4 - Extremely
+            </p>
+        
+            <form action="/questionnaire" method="post">
+                {% set counter = 1 %}
+                {% for question in questions %}
+                <div class="question-container">
+                    <label for="question{{ loop.index }}">{{ loop.index }}. {{ question }}</label>
+                    <div class="options">
+                        {% for j in range(5) %}
+                        <label>
+                            <input type="radio" name="question{{ loop.index }}" value="{{ j }}">
+                            {{ j }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% set counter = counter + 1 %}
+                {% endfor %}
+    
+                <!-- Submit Button -->
+                <button type="submit" class="button">Submit</button>
+            </form>
+        </main>
+    </body>
+</html>

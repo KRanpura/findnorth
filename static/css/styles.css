@@ -279,3 +279,20 @@ h2 {
 .icon-item a:hover .icon-label {
     color: #FFD700;  /* Darker yellow on hover */
 }
+
+.question-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
+    margin-bottom: 20px; /*  space between questions */
+}
+
+.question-container label {
+    font-weight: bold; /*  bold question label for emphasis */
+    margin-bottom: 8px; /*  space between question and radio buttons */
+}
+
+.options {
+    display: flex;
+    gap: 15px; /* Adds space between radio buttons */
+}

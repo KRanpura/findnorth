@@ -2,6 +2,8 @@ from flask import Flask, render_template, redirect, request, g, url_for, session
 import sqlite3
 import os
 from os import urandom
+import json
+from questions import questions
 
 app = Flask(__name__)
 app.secret_key= urandom(24)
@@ -29,9 +31,59 @@ def get_db():
 def home():
     return render_template("home.html")
 
-@app.route("/login")
+@app.route("/login", methods = ["GET", "POST"])
 def login():
+    if request.method == "POST":
+        if (
+            not request.form.get("email")
+            or not request.form.get("password")
+        ): 
+            return render_template("error.html", message="Enter both email and password to login")
+        email = request.form.get("email")
+        passw = request.form.get("password")
+        # print(f"Email: {email}, Password: {passw}")  # Debug log
+
+        db = get_db()   
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
+        user = cursor.fetchone()
+        if not user:
+            return render_template("error.html", message="Email not present in database")
+        # print(f"Stored password: {user['passw']}")  # Debug log
+        if user["passw"] == passw:  
+            # Store user information in the session
+            session["user_id"] = user["id"]
+            session["name"] = user["first_name"]
+            return redirect(url_for("profile"))
+        else:
+            return render_template("error.html", message="Incorrect password")
     return render_template("login.html")
+
+@app.route("/questionnaire", methods = ["GET", "POST"])
+def questionnaire():
+    if request.method == "POST":
+        ques = [f"question{i}" for i in range(1, 21)]
+        missing_answers = [q for q in ques if not request.form.get(q)]
+        if missing_answers:
+            return render_template("error.html", message="Please answer all questions.")
+        
+        total = 0
+        for q in ques:
+            ans = request.form.get(q)
+            if ans is not None:
+                total += int(ans)
+
+        user_id = session.get('user_id')  # Replace with the appropriate way to get user ID
+        sql = """
+            INSERT INTO quest_responses (user_id, responses, score, pcl5result) 
+            VALUES (?, ?, ?, ?)
+        """
+        db = get_db()
+        db.execute(sql, (user_id, total))
+        db.commit()
+        return redirect(url_for("profile"))
+    
+    return render_template("questionnaire.html", questions=questions)
 
 @app.route("/profile")
 def profile():
@@ -50,7 +102,7 @@ def signup():
             or not request.form.get("age")
             or not request.form.get("role")
         ):
-            return render_template("error.html")
+            return render_template("error.html", message= "All fields are required to create an account.")
 
         email = request.form.get("email")
         passw = request.form.get("password")

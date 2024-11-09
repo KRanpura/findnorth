@@ -15,6 +15,7 @@
             </h1>
             <!-- <ul> -->
                 <li><a href="/">Home</a></li>
+                <li><a href="/questionnaire">QuickDiagnose</a></li>
                 <li><a href="/login">Forum</a></li>
                 <li><a href="/signup">Logout</a></li>
             </ul>
@@ -23,8 +24,7 @@
         <!-- Main Content -->
         <main>
             
-            <h2>Hi, welcome to your profile:</h2>
-        
+            <h2>Hi {{ session["name"] }}, welcome to your profile:</h2>
         </main>
     </body>
 </html>
