@@ -160,6 +160,16 @@ main {
     font-weight: bold;
 }
 
+.sex-options {
+    display: flex;
+    gap: 15px; /* Add some space between the radio buttons */
+    margin-bottom: 10px; /* Space below the radio buttons */
+}
+
+.sex-options input {
+    margin-right: 5px; /* Space between the radio button and its label */
+}
+
 /*signup form styles*/
 
 .signup-form input[type="text"],

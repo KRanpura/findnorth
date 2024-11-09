@@ -33,12 +33,22 @@
                 <label for="last">Last Name:</label>
                 <input type="text" id="last" name="last" required>
 
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
                 
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="18" max="100" required>
+
+                <label for="sex">Sex:</label>
+                <div class="sex-options">
+                    <input type="radio" id="male" name="sex" value="M" required>
+                    <label for="male">Male</label>
+                    
+                    <input type="radio" id="female" name="sex" value="F" required>
+                    <label for="female">Female</label>
+                </div>
+
+                <input type="hidden" id="role" name="role" value="">
                 <div class="button-container">
                     <input type="button" class="button" value="I am a healthcare provider" id="doc" onclick="setActive(this)">
                     <input type="button" class="button" value="I am looking for help"id="patient" onclick="setActive(this)">
@@ -49,6 +59,13 @@
                         // Remove "active" class from all buttons
                         document.querySelectorAll('.button-container .button').forEach(btn => btn.classList.remove('active'));
                         button.classList.add('active'); /*add tag */
+
+                        // Set the role based on the clicked button
+                        if (button.id === 'doc') {
+                            document.getElementById('role').value = 'doc'; // Healthcare provider
+                        } else if (button.id === 'patient') {
+                            document.getElementById('role').value = 'patient'; // Patient
+                        }
                     }
                 </script>
 

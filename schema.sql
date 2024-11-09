@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS resumeResult;
+DROP TABLE IF EXISTS quest_responses;
+DROP TABLE IF EXISTS forum_posts;
+DROP TABLE IF EXISTS forum_replies;
 
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -15,8 +17,26 @@ CREATE TABLE users (
 CREATE TABLE quest_responses (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
-    pdf_filename TEXT NOT NULL,
-    job_listing TEXT NOT NULL,
-    match_percentage REAL NOT NULL,
+    responses JSON NOT NULL,
+    score INTEGER NOT NULL,
+    submitted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    pcl5result VARCHAR(100) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE forum_posts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    user_id INTEGER NOT NULL, 
+    title VARCHAR(500),
+    content VARCHAR(1000),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE forum_replies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    og_post_id INTEGER NOT NULL,
+    content VARCHAR(1000), 
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (og_post_id) REFERENCES forum_posts(id)
 );
