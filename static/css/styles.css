@@ -1,0 +1,271 @@
+/* General styling */
+body {
+    background-color: #191970; /* Midnight blue */
+    color: #FFEB3B; /* White-yellow */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    width: 80px; /* Adjust as needed */
+    height: 80px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: #4169E1; /* Light blue */
+    color: #FFFFFF;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #FFFFFF;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.navbar li {
+    display: inline;
+}
+
+.navbar a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #FFEB3B; /* Hover effect: white-yellow */
+}
+
+/* Main content styling */
+main {
+    padding: 20px;
+    text-align: center;
+    font-size: 1.1em;
+    font-family: Helvetica
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px;
+    color: #191970; /* Midnight blue */
+    background-color: #FFEB3B; /* White-yellow */
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+    background-color: #FFD700; /* Darker yellow on hover */
+    color: #FFFFFF;
+}
+
+/* Login form styling */
+.login-form {
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #4169E1; /* Light blue background */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.login-form label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-form .button {
+    width: 100%;
+    padding: 10px;
+    color: #191970; /* Midnight blue */
+    background-color: #FFEB3B; /* White-yellow */
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-form .button:hover {
+    background-color: #FFD700; /* Darker yellow on hover */
+    color: #FFFFFF;
+}
+
+.signup-text {
+    text-align: center;
+    margin-top: 15px;
+    color: #FFFFFF;
+}
+
+.signup-text a {
+    color: #FFEB3B; /* White-yellow */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-text a:hover {
+    color: #FFD700; /* Darker yellow on hover */
+    text-decoration: underline;
+}
+
+.signup-form {
+    max-width: 300px;
+    margin: 30px auto;
+    /* padding: 20px; */
+    background-color: #4169E1; /* Light blue background */
+    /* border-radius: 30px; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.signup-form label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+/*signup form styles*/
+
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.signup-form .button {
+    width: 100%;
+    padding: 10px;
+    color: #191970; /* Midnight blue */
+    background-color: #FFEB3B; /* White-yellow */
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signup-form .button:hover {
+    background-color: #FFD700; /* Darker yellow on hover */
+    color: #FFFFFF;
+}
+
+.email-note {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85em;  /* Slightly smaller text */
+    color: #cccccc;     /* Light grey color for subtlety */
+    text-align: left;
+}
+
+/* Default button styling */
+.button-container .button {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px;
+    color: #191970; /* Midnight blue */
+    background-color: #FFEB3B; /* White-yellow */
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Style for the active button */
+.button-container .button.active {
+    background-color: #FFD700; /* Darker yellow */
+    color: #FFFFFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Styling for the "What we offer" heading */
+h2 {
+    font-size: 2.5em;  /* Makes the "What we offer" heading larger */
+    color: #FFFFFF;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Container for the icons */
+.icons-container {
+    display: flex;
+    justify-content: center;  /* Centers the icons horizontally */
+    align-items: center;
+    gap: 70px;  /* space between icons */
+    flex-wrap: wrap;  /* Ensures items wrap to the next line if not enough space */
+    margin-top: 20px;
+}
+
+/* Styling for each icon item */
+.icon-item {
+    text-align: center;
+    margin: 10px;
+    max-width: 300px;  /* Optional: Prevents the icons from growing too large */
+}
+
+.icon {
+    width: 200px;  /* Makes the icons bigger */
+    height: 200px;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for the icon */
+.icon:hover {
+    transform: scale(1.1);  /* Slightly enlarge the icon on hover */
+}
+
+/* Styling for the icon labels */
+.icon-label {
+    font-size: 0.9em;  /* Makes the label text smaller */
+    color: #FFEB3B;  /* White-yellow color for the labels */
+    transition: color 0.3s;
+    word-wrap: break-word;  /* Allows long text to wrap to the next line if needed */
+    margin-top: 10px;  /* Adds space between the icon and the label */
+    text-align: center;
+    width: 200px;  /* Ensures labels have the same width as icons */
+}
+
+/* Change label color on hover */
+.icon-item a:hover .icon-label {
+    color: #FFD700;  /* Darker yellow on hover */
+}

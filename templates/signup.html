@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FindNorth</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <h1>
+                FindNorth
+                <img src="{{ url_for('static', filename='images/nstar.png') }}" alt="FindNorth Logo" class="logo">
+            </h1>
+            <!-- <ul> -->
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main>
+            <p>Create an account with us</p>
+            <form action="/signup" method="post" class="login-form">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <small class="email-note">We won't send you any emails unless you need a password reset.</small>
+
+                <label for="first">First Name:</label>
+                <input type="text" id="first" name="first" required>
+                
+                <label for="last">Last Name:</label>
+                <input type="text" id="last" name="last" required>
+
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <div class="button-container">
+                    <input type="button" class="button" value="I am a healthcare provider" id="doc" onclick="setActive(this)">
+                    <input type="button" class="button" value="I am looking for help"id="patient" onclick="setActive(this)">
+                </div>
+
+                <script>
+                    function setActive(button) {
+                        // Remove "active" class from all buttons
+                        document.querySelectorAll('.button-container .button').forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active'); /*add tag */
+                    }
+                </script>
+
+                <button type="submit" class="button">Sign Up</button>
+            </form>
+            <p class="signup-text">
+                Already have an account? <a href="/login">Login</a>
+            </p>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FindNorth</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <h1>
+                FindNorth
+                <img src="{{ url_for('static', filename='images/nstar.png') }}" alt="FindNorth Logo" class="logo">
+            </h1>
+            <!-- <ul> -->
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/signup">Signup</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main>
+            <p>Let us guide you one step closer to your PTSD diagnosis, and ensure that you're never alone in the fight after.</p>
+            
+            <h2>What we offer:</h2>
+            
+            <div class="icons-container">
+                <div class="icon-item">
+                    <a href="/signup">
+                        <img src="static/images/icon1.png" alt="Icon 1" class="icon">
+                        <p class="icon-label">Obtain a quick base diagnosis based on our Harvard study inspired questionnaire </p>
+                    </a>
+                </div>
+                <div class="icon-item">
+                    <a href="/signup">
+                        <img src="static/images/icon2.png" alt="Icon 2" class="icon">
+                        <p class="icon-label">Post anonymously on our chat forum to connect with a community of healthcare providers and other users</p>
+                    </a>
+                </div>
+                <div class="icon-item">
+                    <a href="/signup">
+                        <img src="static/images/icon3.png" alt="Icon 3" class="icon">
+                        <p class="icon-label">Track your mental health journey and set goals</p>
+                    </a>
+                </div>
+            </div>
+            <h2>And more!</h2>
+
+        </main>
+    </body>
+</html>
