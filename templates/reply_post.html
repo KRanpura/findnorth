@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FindNorth</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <h1>
+                FindNorth
+                <img src="{{ url_for('static', filename='images/nstar.png') }}" alt="FindNorth Logo" class="logo">
+            </h1>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/forum">Forum</a></li>
+                <li><a href="/questionnaire">QuickDiagnose</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <section class="reply-post-container">
+                <h2>Reply to Post</h2>
+
+                <!-- Display the Original Post -->
+                <div class="original-post">
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.content }}</p>
+                </div>
+
+                <form action="{{ url_for('reply_post', post_id=post.id) }}" method="POST" class="reply-form">
+                    <label for="reply_content">Your Reply:</label>
+                    <textarea id="reply_content" name="reply_content" rows="5" required></textarea>
+
+                    <button type="submit" class="button">Submit Reply</button>
+                </form>
+            </section>
+        </main>
+
+    </body>
+</html>

@@ -68,8 +68,55 @@ def logout():
 
 @app.route("/forum")
 def forum():
-    return render_template("forum.html")
+    db = get_db()
+    cursor = db.cursor()
+    # Fetch posts along with the user's role
+    cursor.execute("""
+        SELECT forum_posts.*, users.user_role
+        FROM forum_posts
+        JOIN users ON forum_posts.user_id = users.id
+    """)
+    posts = cursor.fetchall()
 
+    # Convert sqlite3.Row objects to dictionaries
+    posts = [dict(post) for post in posts]
+    # Fetch replies and include the user role
+    for post in posts:
+        cursor.execute("""
+            SELECT forum_replies.*, users.user_role
+            FROM forum_replies
+            JOIN users ON forum_replies.user_id = users.id
+            WHERE forum_replies.og_post_id = ?
+        """, (post['id'],))
+        replies = cursor.fetchall()
+
+        # Convert replies to dictionaries
+        post['replies'] = [dict(reply) for reply in replies]
+    return render_template("forum.html", posts=posts)
+
+@app.route("/reply_post/<int:post_id>", methods=["GET", "POST"])
+def reply_post(post_id):
+    db = get_db()
+    cursor = db.cursor()
+    
+    # Fetch the post data to display
+    cursor.execute("SELECT * FROM forum_posts WHERE id = ?", (post_id,))
+    post = cursor.fetchone()
+    
+    if request.method == "POST":
+        reply_content = request.form.get("reply_content")
+        user_id = session["user_id"]
+        
+        # Insert the reply into the database
+        cursor.execute(
+            "INSERT INTO forum_replies (user_id, og_post_id, content) VALUES (?, ?, ?)",
+            (user_id, post_id, reply_content),
+        )
+        db.commit()
+        return redirect(url_for("forum"))
+
+    # Send post details to the template
+    return render_template("reply_post.html", post=post)
 
 @app.route("/questionnaire", methods = ["GET", "POST"])
 def questionnaire():
@@ -103,7 +150,7 @@ def profile():
     return render_template("profile.html")
 
 
-@app.route("/make-post")
+@app.route("/make_post")
 def makepost():
     return render_template("new_post.html")
 
@@ -118,7 +165,6 @@ def addpost():
         title = request.form.get("title")
         content = request.form.get("content")
         userid = session["user_id"]
-        role = session["role"]
         db =get_db()
         cursor = db.cursor()
         cursor.execute(
@@ -126,7 +172,9 @@ def addpost():
             (userid, title, content),
         )
         db.commit()
+        return render_template("thank_you.html")
 
+    return render_template("new_post.html")
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():

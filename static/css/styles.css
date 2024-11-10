@@ -406,3 +406,53 @@ h2 {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.thank-you-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;        /* Centers horizontally */
+    justify-content: center;    /* Centers vertically */
+    height: 100vh;              /* Full viewport height */
+    text-align: center;         /* Center text inside the container */
+    padding: 20px;
+}
+
+.thank-you-container h1 {
+    font-size: 2em;
+    color: #FFEB3B;  /* White-yellow color for heading */
+    margin-bottom: 15px;
+}
+
+.thank-you-container p {
+    font-size: 1.2em;
+    color: #FFFFFF;  /* White color for text */
+    margin-bottom: 20px;
+}
+
+.thank-you-container .button {
+    padding: 12px 24px;
+    color: #191970; /* Midnight blue */
+    background-color: #FFEB3B; /* White-yellow */
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.thank-you-container .button:hover {
+    background-color: #FFD700; /* Darker yellow on hover */
+    color: #FFFFFF;
+}
+
+.doc-post {
+    background-color: #d4edda; /* Light green background */
+    border-left: 5px solid #28a745; /* Green border */
+}
+
+/* Style for doctor's replies */
+.doc-reply {
+    background-color: #d4edda; /* Light green background */
+    border-left: 5px solid #28a745; /* Green border */
+}

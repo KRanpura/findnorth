@@ -20,7 +20,7 @@
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
-        
+
         <!-- Main Content -->
         <main>
             <section class="forum-header">
@@ -52,17 +52,34 @@
             <section class="posts-container">
                 {% if posts %}
                     {% for post in posts %}
-                        <div class="post">
-                            <h4>{{ post.title }}</h4>
-                            <p>{{ post.content }}</p>
-                            <p><em>By {{ post.user.first_name }} {{ post.user.last_name }}</em></p>
-                        </div>
+                    <div class="post {% if post.user_role == 'doc' %}doc-post{% endif %}">
+                        <h4>{{ post.id }} . {{ post.title }}</h4>
+                        <p>{{ post.content }}</p>
+                        <form action="{{ url_for('reply_post', post_id=post.id) }}" method="get">
+                            <button type="submit" class="button">Reply</button>
+                        </form>
+                        
+                        <!-- Display Replies -->
+                        {% if post.replies %}
+                            <div class="replies">
+                                {% for reply in post.replies %}
+                                    <div class="reply {% if reply.user_role == 'doc' %}doc-reply{% endif %}">
+                                        <p>{{ reply.content }}</p>
+                                        {% if reply.user_role == 'doc' %}
+                                            <p><em>Reply posted by a {{ reply.user_role }}</em></p>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p>No replies yet.</p>
+                        {% endif %}
+                    </div>
                     {% endfor %}
                 {% else %}
                     <p class="empty-forum">Forum is Empty</p>
                 {% endif %}
             </section>
         </main>
-
     </body>
 </html>

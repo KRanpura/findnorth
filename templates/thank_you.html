@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1>
+            FindNorth
+            <img src="{{ url_for('static', filename='images/nstar.png') }}" alt="FindNorth Logo" class="logo">
+        </h1>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href= "/forum">Forum</a></li>
+            <li><a href="/questionnaire">QuickDiagnose</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="thank-you-container">
+        <h1>Thank you for your post!</h1>
+        <p>Your post has been successfully submitted.</p>
+        <p><a href="/forum" class="button">Go to Forum</a></p>
+    </div>
+</body>
+</html>
