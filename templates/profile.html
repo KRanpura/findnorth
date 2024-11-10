@@ -14,18 +14,33 @@
                 FindNorth
                 <img src="{{ url_for('static', filename='images/nstar.png') }}" alt="FindNorth Logo" class="logo">
             </h1>
-            <!-- <ul> -->
+            <ul>
                 <li><a href="/">Home</a></li>
+                <li><a href= "/forum">Forum</a></li>
                 <li><a href="/questionnaire">QuickDiagnose</a></li>
-                <li><a href="/forum">Forum</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
         
         <!-- Main Content -->
         <main>
-            
             <h2>Hi {{ session["name"] }}, welcome to your profile:</h2>
+        
+            <div class="graphs">
+                <h3>National Institude of Mental Health PTSD Graph</h3>
+                <a href="https://www.nimh.nih.gov/health/statistics/post-traumatic-stress-disorder-ptsd#part_2612" target="_blank">
+                    <img src="{{ url_for('static', filename='data/nihgraph.png') }}" alt="Graph 1" class="graphs-img">
+                </a>                <div class="graph-subtext">This graph shows the analysis of PTSD data among adults. (n=9282)</div>
+        
+                <h3>National Institude of Mental Health PTSD Pie Chart</h3>
+                <a href="https://www.nimh.nih.gov/health/statistics/post-traumatic-stress-disorder-ptsd#part_2612" target="_blank">
+                    <img src="{{ url_for('static', filename='data/nihpiechart.jpg') }}" alt="Graph 2" class="graphs-img">
+                </a>                <div class="graph-subtext">This pie chart display the distribution of PTSD cases via severity level. (n=9282)</div>
+        
+                <h3>Predicted PTSD vs Actual Linear Regression</h3>
+                <img src="{{ url_for('static', filename='data/predictive-plot.png') }}" alt="Graph 3" class="graphs-img">
+                <div class="graph-subtext">This plot compares predicted PTSD outcomes with actual results. (n=9282)*3</div>
+            </div>
         </main>
     </body>
 </html>

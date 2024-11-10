@@ -85,7 +85,7 @@ plt.title("Actual vs Predicted PTSD (Percentile)")
 handles = [plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='blue', markersize=8, label='Male'),
            plt.Line2D([0], [0], marker='o', color='w', markerfacecolor='red', markersize=8, label='Female')]
 plt.legend(handles=handles, title="Sex")
-
+#plt.savefig('static/predictive-plot.png') 
 plt.show()
 
 #test print to see predictions based off the ptsd probability
