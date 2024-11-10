@@ -54,15 +54,27 @@ def login():
             # Store user information in the session
             session["user_id"] = user["id"]
             session["name"] = user["first_name"]
+            session["role"] = user["user_role"]
             return redirect(url_for("profile"))
         else:
             return render_template("error.html", message="Incorrect password")
     return render_template("login.html")
 
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("home"))
+
+@app.route("/forum")
+def forum():
+    return render_template("forum.html")
+
+
 @app.route("/questionnaire", methods = ["GET", "POST"])
 def questionnaire():
     if request.method == "POST":
-        ques = [f"question{i}" for i in range(1, 21)]
+        ques = [f"q{i}" for i in range(1, 21)]
         missing_answers = [q for q in ques if not request.form.get(q)]
         if missing_answers:
             return render_template("error.html", message="Please answer all questions.")
@@ -74,9 +86,10 @@ def questionnaire():
                 total += int(ans)
 
         user_id = session.get('user_id')  # Replace with the appropriate way to get user ID
+       
         sql = """
-            INSERT INTO quest_responses (user_id, responses, score, pcl5result) 
-            VALUES (?, ?, ?, ?)
+            INSERT INTO quest_responses (user_id, pcl5result) 
+            VALUES (?, ?)
         """
         db = get_db()
         db.execute(sql, (user_id, total))
@@ -88,6 +101,32 @@ def questionnaire():
 @app.route("/profile")
 def profile():
     return render_template("profile.html")
+
+
+@app.route("/make-post")
+def makepost():
+    return render_template("new_post.html")
+
+@app.route("/add_post", methods=["GET", "POST"])
+def addpost():
+    if request.method == "POST":
+        if (
+            not request.form.get("title")
+            or not request.form.get("content")
+        ):
+            return render_template("error.html")
+        title = request.form.get("title")
+        content = request.form.get("content")
+        userid = session["user_id"]
+        role = session["role"]
+        db =get_db()
+        cursor = db.cursor()
+        cursor.execute(
+            "INSERT INTO forum_posts (user_id, title, content) VALUES (?, ?, ?)",
+            (userid, title, content),
+        )
+        db.commit()
+
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -137,13 +176,27 @@ def signup():
         cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
         user = cursor.fetchone()
         session["user_id"] = user["id"]  # Store the user ID in the session
-
+        session["name"] = user["first_name"]
+        session["role"] = user["user_role"]
         return redirect(url_for("profile"))  # Redirect to the user's profile or dashboard
 
     return render_template("signup.html")
+
+
+def determine_pcl5_result(score):
+    if score < 20:
+        return "Low"
+    elif 20 <= score < 40:
+        return "Moderate"
+    elif 40 <= score < 60:
+        return "Serious"
+    else:
+        return "Extreme"
 
 
 init_db()
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+    

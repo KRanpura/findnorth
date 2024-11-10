@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FindNorth</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <h1>
+                FindNorth
+                <img src="{{ url_for('static', filename='images/nstar.png') }}" alt="FindNorth Logo" class="logo">
+            </h1>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/questionnaire">QuickDiagnose</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main Content -->
+        <main>
+            <section class="forum-header">
+                <h2>Engage with the community!</h2>
+                <h4>Feel free to make posts, search for posts by keyword, or reply to posts.</h4>
+
+                <div class="forum-controls">
+                    <table class="forum-table">
+                        <tr>
+                            <!-- Left side: Make Post Button -->
+                            <td class="left-panel">
+                                <button class="button" onclick="window.location.href='/make_post'">Make a Post</button>
+                            </td>
+            
+                            <!-- Right side: Search Bar -->
+                            <td class="right-panel">
+                                <form action="/search" method="get">
+                                    <label for="keyword">Search Posts:</label>
+                                    <input type="text" name="keyword" id="keyword" placeholder="Search posts by keyword" class="search-bar">
+                                    <button type="submit" class="button">Search</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Existing Posts Section -->
+            <section class="posts-container">
+                {% if posts %}
+                    {% for post in posts %}
+                        <div class="post">
+                            <h4>{{ post.title }}</h4>
+                            <p>{{ post.content }}</p>
+                            <p><em>By {{ post.user.first_name }} {{ post.user.last_name }}</em></p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="empty-forum">Forum is Empty</p>
+                {% endif %}
+            </section>
+        </main>
+
+    </body>
+</html>

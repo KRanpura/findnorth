@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>FindNorth</title>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     </head>
     <body>
@@ -23,31 +24,389 @@
         
         <!-- Main Content -->
         <main>
-            <h2>Questionnaire:</h2>
+            <h2>PCL-5 Questionnaire:</h2>
             <p>In the past month, on a scale of 0-4, how much were you bothered by:<br>
                0 - Not at all, 1 - A little bit, 2 - Moderately, 3 - Quite a bit, 4 - Extremely
             </p>
         
+
+            <div class="form-container">
+
+           
             <form action="/questionnaire" method="post">
-                {% set counter = 1 %}
-                {% for question in questions %}
-                <div class="question-container">
-                    <label for="question{{ loop.index }}">{{ loop.index }}. {{ question }}</label>
-                    <div class="options">
-                        {% for j in range(5) %}
-                        <label>
-                            <input type="radio" name="question{{ loop.index }}" value="{{ j }}">
-                            {{ j }}
-                        </label>
-                        {% endfor %}
-                    </div>
+            <div class="question">
+                <label for = "q1">
+                    "Repeated, disturbing, and unwanted memories of the stressful experience?"
+                </label>
+                <div>
+                    <input type="radio" id="q1_0" name="q1" value="0" required>
+                    <label for="q1_0">0</label>
+                    <input type="radio" id="q1_1" name="q1" value="1">
+                    <label for="q1_1">1</label>
+                    <input type="radio" id="q1_2" name="q1" value="2">
+                    <label for="q1_2">2</label>
+                    <input type="radio" id="q1_3" name="q1" value="3">
+                    <label for="q1_3">3</label>
+                    <input type="radio" id="q1_4" name="q1" value="4">
+                    <label for="q1_4">4</label>
                 </div>
-                {% set counter = counter + 1 %}
-                {% endfor %}
+            </div>
+
+            <div class="question">
+                <label for = "q2">
+                    "Repeated, disturbing dreams of the stressful experience?"
+                </label>
+                <div>
+                    <input type="radio" id="q2_0" name="q2" value="0" required>
+                    <label for="q2_0">0</label>
+                    <input type="radio" id="q2_1" name="q2" value="1">
+                    <label for="q2_1">1</label>
+                    <input type="radio" id="q2_2" name="q2" value="2">
+                    <label for="q2_2">2</label>
+                    <input type="radio" id="q2_3" name="q2" value="3">
+                    <label for="q2_3">3</label>
+                    <input type="radio" id="q2_4" name="q2" value="4">
+                    <label for="q2_4">4</label>
+                </div>
+            </div>
+
+            
+            <div class="question">
+                <label for = "q3">
+                    "Suddenly feeling or acting as if the stressful experience were actually happening again (as if you were actually back there reliving it)?"
+                                </label>
+                <div>
+                    <input type="radio" id="q3_0" name="q3" value="0" required>
+                    <label for="q3_0">0</label>
+                    <input type="radio" id="q3_1" name="q3" value="1">
+                    <label for="q3_1">1</label>
+                    <input type="radio" id="q3_2" name="q3" value="2">
+                    <label for="q3_2">2</label>
+                    <input type="radio" id="q3_3" name="q3" value="3">
+                    <label for="q3_3">3</label>
+                    <input type="radio" id="q3_4" name="q3" value="4">
+                    <label for="q3_4">4</label>
+                </div>
+            </div>
     
+            <div class="question">
+                <label for = "q4">
+                    "Feeling very upset when something reminded you of the stressful experience?"
+                                </label>
+                <div>
+                    <input type="radio" id="q4_0" name="q4" value="0" required>
+                    <label for="q4_0">0</label>
+                    <input type="radio" id="q4_1" name="q4" value="1">
+                    <label for="q4_1">1</label>
+                    <input type="radio" id="q4_2" name="q4" value="2">
+                    <label for="q4_2">2</label>
+                    <input type="radio" id="q4_3" name="q4" value="3">
+                    <label for="q4_3">3</label>
+                    <input type="radio" id="q4_4" name="q4" value="4">
+                    <label for="q4_4">4</label>
+                </div>
+            </div>
+
+            
+            <div class="question">
+                <label for = "q5">
+                    "Having strong physical reactions when reminded of the stressful experience (ex. heart pounding, trouble breathing, sweating)?"
+               </label>
+                <div>
+                    <input type="radio" id="q5_0" name="q5" value="0" required>
+                    <label for="q5_0">0</label>
+                    <input type="radio" id="q5_1" name="q5" value="1">
+                    <label for="q5_1">1</label>
+                    <input type="radio" id="q5_2" name="q5" value="2">
+                    <label for="q5_2">2</label>
+                    <input type="radio" id="q5_3" name="q5" value="3">
+                    <label for="q5_3">3</label>
+                    <input type="radio" id="q5_4" name="q5" value="4">
+                    <label for="q5_4">4</label>
+                </div>
+            </div>
+
+
+            <div class="question">
+                <label for = "q6">
+                    "Avoiding memories, thoughts, or feelings related to the stressful experience?"
+                </label>
+                <div>
+                    <input type="radio" id="q6_0" name="q6" value="0" required>
+                    <label for="q6_0">0</label>
+                    <input type="radio" id="q6_1" name="q6" value="1">
+                    <label for="q6_1">1</label>
+                    <input type="radio" id="q6_2" name="q6" value="2">
+                    <label for="q6_2">2</label>
+                    <input type="radio" id="q6_3" name="q6" value="3">
+                    <label for="q6_3">3</label>
+                    <input type="radio" id="q6_4" name="q6" value="4">
+                    <label for="q6_4">4</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label for = "q7">
+                    "Avoiding external reminders of the stressful experience (for example, people, places, conversations, activities, objects, or situations)?"                </label>
+                <div>
+                    <input type="radio" id="q7_0" name="q7" value="0" required>
+                    <label for="q7_0">0</label>
+                    <input type="radio" id="q7_1" name="q7" value="1">
+                    <label for="q7_1">1</label>
+                    <input type="radio" id="q7_2" name="q7" value="2">
+                    <label for="q7_2">2</label>
+                    <input type="radio" id="q7_3" name="q7" value="3">
+                    <label for="q7_3">3</label>
+                    <input type="radio" id="q7_4" name="q7" value="4">
+                    <label for="q7_4">4</label>
+                </div>
+            </div>
+
+            
+            <div class="question">
+                <label for = "q8">
+                    "Trouble remembering important parts of the stressful experience?"
+                    </label>
+                <div>
+                    <input type="radio" id="q8_0" name="q8" value="0" required>
+                    <label for="q8_0">0</label>
+                    <input type="radio" id="q8_1" name="q8" value="1">
+                    <label for="q8_1">1</label>
+                    <input type="radio" id="q8_2" name="q8" value="2">
+                    <label for="q8_2">2</label>
+                    <input type="radio" id="q8_3" name="q8" value="3">
+                    <label for="q8_3">3</label>
+                    <input type="radio" id="q8_4" name="q8" value="4">
+                    <label for="q8_4">4</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <label for = "q9">
+                    "Negative beliefs or expectations about yourself, others, or the world  (for example, having thoughts such as: I am bad, there is something seriously wrong with me, no one can be trusted, the world is completely dangerous)?"
+                </label>
+                <div>
+                    <input type="radio" id="q9_0" name="q9" value="0" required>
+                    <label for="q9_0">0</label>
+                    <input type="radio" id="q9_1" name="q9" value="1">
+                    <label for="q9_1">1</label>
+                    <input type="radio" id="q9_2" name="q9" value="2">
+                    <label for="q9_2">2</label>
+                    <input type="radio" id="q9_3" name="q9" value="3">
+                    <label for="q9_3">3</label>
+                    <input type="radio" id="q9_4" name="q9" value="4">
+                    <label for="q9_4">4</label>
+                </div>
+            </div>
+
+            
+            <div class="question">
+                <label for = "q10">
+                    "Blaming yourself or someone else for the stressful experience or what happened after it?"
+               </label>
+                <div>
+                    <input type="radio" id="q10_0" name="q10" value="0" required>
+                    <label for="q10_0">0</label>
+                    <input type="radio" id="q10_1" name="q10" value="1">
+                    <label for="q10_1">1</label>
+                    <input type="radio" id="q10_2" name="q10" value="2">
+                    <label for="q10_2">2</label>
+                    <input type="radio" id="q10_3" name="q10" value="3">
+                    <label for="q10_3">3</label>
+                    <input type="radio" id="q10_4" name="q10" value="4">
+                    <label for="q10_4">4</label>
+                </div>
+            </div>
+
+
+            <div class="question">
+                <label for = "q11">
+                    "Having strong negative feelings such as fear, horror, anger, guilt, or shame?"
+                </label>
+                <div>
+                    <input type="radio" id="q11_0" name="q11" value="0" required>
+                    <label for="q11_0">0</label>
+                    <input type="radio" id="q11_1" name="q11" value="1">
+                    <label for="q11_1">1</label>
+                    <input type="radio" id="q11_2" name="q11" value="2">
+                    <label for="q11_2">2</label>
+                    <input type="radio" id="q11_3" name="q11" value="3">
+                    <label for="q11_3">3</label>
+                    <input type="radio" id="q11_4" name="q11" value="4">
+                    <label for="q11_4">4</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label for = "q12">
+                    "Loss of interest in activities you used to enjoy?"
+                </label>
+                <div>
+                    <input type="radio" id="q12_0" name="q12" value="0" required>
+                    <label for="q12_0">0</label>
+                    <input type="radio" id="q12_1" name="q12" value="1">
+                    <label for="q12_1">1</label>
+                    <input type="radio" id="q12_2" name="q12" value="2">
+                    <label for="q12_2">2</label>
+                    <input type="radio" id="q12_3" name="q12" value="3">
+                    <label for="q12_3">3</label>
+                    <input type="radio" id="q12_4" name="q12" value="4">
+                    <label for="q12_4">4</label>
+                </div>
+            </div>
+
+            
+            <div class="question">
+                <label for = "q13">
+                    "Feeling distant or cut off from other people?",
+                    </label>
+                <div>
+                    <input type="radio" id="q13_0" name="q13" value="0" required>
+                    <label for="q13_0">0</label>
+                    <input type="radio" id="q13_1" name="q13" value="1">
+                    <label for="q13_1">1</label>
+                    <input type="radio" id="q13_2" name="q13" value="2">
+                    <label for="q13_2">2</label>
+                    <input type="radio" id="q13_3" name="q13" value="3">
+                    <label for="q13_3">3</label>
+                    <input type="radio" id="q13_4" name="q13" value="4">
+                    <label for="q13_4">4</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <label for = "q14">
+                    "Trouble experiencing positive feelings (for example,being unable to feel happiness or have loving feelings for people close to you)?"                                
+                </label>
+                <div>
+                    <input type="radio" id="q14_0" name="q14" value="0" required>
+                    <label for="q14_0">0</label>
+                    <input type="radio" id="q14_1" name="q14" value="1">
+                    <label for="q14_1">1</label>
+                    <input type="radio" id="q14_2" name="q14" value="2">
+                    <label for="q14_2">2</label>
+                    <input type="radio" id="q14_3" name="q14" value="3">
+                    <label for="q14_3">3</label>
+                    <input type="radio" id="q14_4" name="q14" value="4">
+                    <label for="q14_4">4</label>
+                </div>
+            </div>
+
+            
+            <div class="question">
+                <label for = "q15">
+                    "Irritable behavior, angry outbursts, or acting aggressively?"
+               </label>
+                <div>
+                    <input type="radio" id="q15_0" name="q15" value="0" required>
+                    <label for="q15_0">0</label>
+                    <input type="radio" id="q15_1" name="q15" value="1">
+                    <label for="q15_1">1</label>
+                    <input type="radio" id="q15_2" name="q15" value="2">
+                    <label for="q15_2">2</label>
+                    <input type="radio" id="q15_3" name="q15" value="3">
+                    <label for="q15_3">3</label>
+                    <input type="radio" id="q15_4" name="q15" value="4">
+                    <label for="q15_4">4</label>
+                </div>
+            </div>
+
+
+            <div class="question">
+                <label for = "q16">
+                    "Taking too many risks or doing things that could cause you harm?"
+                </label>
+                <div>
+                    <input type="radio" id="q16_0" name="q16" value="0" required>
+                    <label for="q16_0">0</label>
+                    <input type="radio" id="q16_1" name="q16" value="1">
+                    <label for="q16_1">1</label>
+                    <input type="radio" id="q16_2" name="q16" value="2">
+                    <label for="q16_2">2</label>
+                    <input type="radio" id="q16_3" name="q16" value="3">
+                    <label for="q16_3">3</label>
+                    <input type="radio" id="q16_4" name="q16" value="4">
+                    <label for="q16_4">4</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <label for = "q17">
+                    "Being 'superalert' or watchful or on guard?"
+                <div>
+                    <input type="radio" id="q17_0" name="q17" value="0" required>
+                    <label for="q17_0">0</label>
+                    <input type="radio" id="q17_1" name="q17" value="1">
+                    <label for="q17_1">1</label>
+                    <input type="radio" id="q17_2" name="q17" value="2">
+                    <label for="q17_2">2</label>
+                    <input type="radio" id="q17_3" name="q17" value="3">
+                    <label for="q17_3">3</label>
+                    <input type="radio" id="q17_4" name="q17" value="4">
+                    <label for="q17_4">4</label>
+                </div>
+            </div>
+
+            
+            <div class="question">
+                <label for = "q18">
+                    "Feeling jumpy or easily startled?"
+                    </label>
+                <div>
+                    <input type="radio" id="q18_0" name="q18" value="0" required>
+                    <label for="q18_0">0</label>
+                    <input type="radio" id="q18_1" name="q18" value="1">
+                    <label for="q18_1">1</label>
+                    <input type="radio" id="q18_2" name="q18" value="2">
+                    <label for="q18_2">2</label>
+                    <input type="radio" id="q18_3" name="q18" value="3">
+                    <label for="q18_3">3</label>
+                    <input type="radio" id="q18_4" name="q18" value="4">
+                    <label for="q18_4">4</label>
+                </div>
+            </div>
+    
+            <div class="question">
+                <label for = "q19">
+                    "Having difficulty concentrating?"
+                </label>
+                <div>
+                    <input type="radio" id="q19_0" name="q19" value="0" required>
+                    <label for="q19_0">0</label>
+                    <input type="radio" id="q19_1" name="q19" value="1">
+                    <label for="q19_1">1</label>
+                    <input type="radio" id="q19_2" name="q19" value="2">
+                    <label for="q19_2">2</label>
+                    <input type="radio" id="q19_3" name="q19" value="3">
+                    <label for="q19_3">3</label>
+                    <input type="radio" id="q19_4" name="q19" value="4">
+                    <label for="q19_4">4</label>
+                </div>
+            </div>
+
+            
+            <div class="question">
+                <label for = "q20">
+                    "Trouble falling or staying asleep?"
+               </label>
+                <div>
+                    <input type="radio" id="q20_0" name="q20" value="0" required>
+                    <label for="q20_0">0</label>
+                    <input type="radio" id="q20_1" name="q20" value="1">
+                    <label for="q20_1">1</label>
+                    <input type="radio" id="q20_2" name="q20" value="2">
+                    <label for="q20_2">2</label>
+                    <input type="radio" id="q20_3" name="q20" value="3">
+                    <label for="q20_3">3</label>
+                    <input type="radio" id="q20_4" name="q20" value="4">
+                    <label for="q20_4">4</label>
+                </div>
+            </div>
+
                 <!-- Submit Button -->
                 <button type="submit" class="button">Submit</button>
             </form>
+        </div>
         </main>
     </body>
 </html>
