@@ -14,10 +14,18 @@
                 FindNorth
                 <img src="{{ url_for('static', filename='images/nstar.png') }}" alt="FindNorth Logo" class="logo">
             </h1>
-            <!-- <ul> -->
-                <li><a href="/">Home</a></li>
-                <li><a href="/login">Login</a></li>
-                <li><a href="/signup">Signup</a></li>
+            <ul>
+                {% if session.get('user_id') %}
+                    <!-- User is logged in -->
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/questionnaire">QuickDiagnose</a></li>
+                    <li><a href="/forum">Forum</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                {% else %}
+                    <!-- User is not logged in -->
+                    <li><a href="/signup">Signup</a></li>
+                    <li><a href="/login">Login</a></li>
+                {% endif %}
             </ul>
         </nav>
         
@@ -29,26 +37,25 @@
             
             <div class="icons-container">
                 <div class="icon-item">
-                    <a href="/signup">
+                    <a href="{% if session.get('user_id') %}/questionnaire{% else %}/signup{% endif %}">
                         <img src="static/images/icon1.png" alt="Icon 1" class="icon">
-                        <p class="icon-label">Obtain a quick base diagnosis based on our Harvard study inspired questionnaire </p>
+                        <p class="icon-label">Obtain a quick base diagnosis based on our Harvard study inspired questionnaire</p>
                     </a>
                 </div>
                 <div class="icon-item">
-                    <a href="/signup">
+                    <a href="{% if session.get('user_id') %}/forum{% else %}/signup{% endif %}">
                         <img src="static/images/icon2.png" alt="Icon 2" class="icon">
                         <p class="icon-label">Post anonymously on our chat forum to connect with a community of healthcare providers and other users</p>
                     </a>
                 </div>
                 <div class="icon-item">
-                    <a href="/signup">
+                    <a href="{% if session.get('user_id') %}/profile{% else %}/signup{% endif %}">
                         <img src="static/images/icon3.png" alt="Icon 3" class="icon">
                         <p class="icon-label">Track your mental health journey and set goals</p>
                     </a>
                 </div>
             </div>
             <h2>And more!</h2>
-
         </main>
     </body>
 </html>
