@@ -98,6 +98,30 @@ def forum():
         post['replies'] = [dict(reply) for reply in replies]
     return render_template("forum.html", posts=posts)
 
+@app.route("/search", methods = ["GET"])
+def search():
+    keyword = request.args.get("keyword")
+    db = get_db()
+    cursor= db.cursor()
+    cursor.execute("""
+        SELECT forum_posts.*, users.user_role
+        FROM forum_posts
+        JOIN users ON forum_posts.user_id = users.id
+        WHERE forum_posts.title LIKE ? OR forum_posts.content LIKE ?
+    """, (f"%{keyword}%", f"%{keyword}%"))
+    posts = cursor.fetchall()
+
+    posts = [dict(post) for post in posts]
+    for post in posts:
+        cursor.execute("""
+            SELECT forum_replies.*, users.user_role
+            FROM forum_replies
+            JOIN users ON forum_replies.user_id = users.id
+            WHERE forum_replies.og_post_id = ?
+        """, (post['id'],))
+        post['replies'] = [dict(reply) for reply in cursor.fetchall()]
+    return render_template("forum.html", posts=posts, search_query=keyword)
+
 @app.route("/reply_post/<int:post_id>", methods=["GET", "POST"])
 def reply_post(post_id):
     db = get_db()
