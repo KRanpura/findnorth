@@ -406,6 +406,46 @@
                 <!-- Submit Button -->
                 <button type="submit" class="button">Submit</button>
             </form>
+
+
+            <div id="result" style="display:none;">
+                <h3>Results</h3>
+                <p>Age: <span id="result-age"></span></p>
+                <p>Sex: <span id="result-sex"></span></p>
+                <p>PCL Score: <span id="result-pcl"></span></p>
+                <p>PTSD Likelihood: <span id="ptsd-likelihood"></span></p>
+            </div>
+
+<!-- 
+            <script>
+                $(document).ready(function() {
+                    $('#questionnaire-form').on('submit', function(e) {
+                        e.preventDefault();  // Prevent default form submission
+            
+                        $.ajax({
+                            type: 'POST',
+                            url: '/questionnaire',
+                            data: $(this).serialize(),  // Serialize form data
+                            success: function(response) {
+                                console.log(response);  // Log the response to the console
+                                // Display the results in the #result div
+                                $('#result-age').text(response.age);
+                                $('#result-sex').text(response.sex);
+                                $('#result-pcl').text(response.pcl_score);
+            
+                                // Display the predicted PTSD likelihood
+                                $('#ptsd-likelihood').text(response.ptsd_probability.toFixed(2));  // Limit to 2 decimal places
+            
+                                // Show the result div
+                                $('#result').show();
+                            },
+                            error: function() {
+                                alert('Error submitting the form');
+                            }
+                        });
+                    });
+                });
+            </script> -->
         </div>
         </main>
     </body>

@@ -1,11 +1,15 @@
-from flask import Flask, render_template, redirect, request, g, url_for, session
+from flask import Flask, render_template, redirect, request, g, url_for, session,jsonify
 import sqlite3
 import os
 from os import urandom
 import json
 from questions import questions
+import pandas as pd
+from model.ptsd_model import PTSDModel
 
 app = Flask(__name__)
+ptsd_model = PTSDModel()
+
 app.secret_key= urandom(24)
 
 DATABASE = 'findnorth.db'
@@ -118,7 +122,7 @@ def reply_post(post_id):
     # Send post details to the template
     return render_template("reply_post.html", post=post)
 
-@app.route("/questionnaire", methods = ["GET", "POST"])
+@app.route("/questionnaire", methods=["GET", "POST"])
 def questionnaire():
     if request.method == "POST":
         ques = [f"q{i}" for i in range(1, 21)]
@@ -132,18 +136,56 @@ def questionnaire():
             if ans is not None:
                 total += int(ans)
 
+        severity_level = severity(total)
+
         user_id = session.get('user_id')  # Replace with the appropriate way to get user ID
-       
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute("SELECT age, sex FROM users WHERE id = ?", (user_id,))
+        user_data = cursor.fetchone()
+        age = user_data['Age']
+        sex = user_data['Sex']
+
         sql = """
             INSERT INTO quest_responses (user_id, pcl5result) 
             VALUES (?, ?)
         """
-        db = get_db()
         db.execute(sql, (user_id, total))
         db.commit()
-        return redirect(url_for("profile"))
-    
+
+        # Prepare data for the prediction model
+        input_data = pd.DataFrame({
+            'Age': [int(age)],
+            'Sex': [0 if sex == 'F' else 1], 
+            'PCL-Score': [int(total)]  # Ensure the column name is exactly as in the trained model
+        })
+
+        # Get the prediction result
+        prediction = ptsd_model.predict(input_data)
+
+        return render_template("result.html", 
+                               age=age, 
+                               sex=sex, 
+                               pcl_score=total,
+                               severity=severity_level, 
+                               ptsd_probability=prediction[0])
     return render_template("questionnaire.html", questions=questions)
+
+def severity(pcl_score):
+    """
+    Categorizes PCL-5 scores into string values
+    """
+    if 0 <= pcl_score <= 31:
+        return "None/Resilience"
+    if 32 <= pcl_score <= 47:
+        return "Mild"
+    if 48 <= pcl_score <=63:
+        return "Moderate"
+    if 64 <= pcl_score <=80:
+        return "Serious"
+    else:
+        return "Invalid"
+
 
 @app.route("/profile")
 def profile():
@@ -231,15 +273,7 @@ def signup():
     return render_template("signup.html")
 
 
-def determine_pcl5_result(score):
-    if score < 20:
-        return "Low"
-    elif 20 <= score < 40:
-        return "Moderate"
-    elif 40 <= score < 60:
-        return "Serious"
-    else:
-        return "Extreme"
+
 
 
 init_db()
